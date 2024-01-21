@@ -15,7 +15,10 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::prefix('dashboard')->group(function(){
-    Route::GET('/beranda', [DashboardController::class, 'viewBeranda']);
+    Route::middleware('auth:administrator')->group(function(){
+        Route::GET('/beranda', [DashboardController::class, 'viewBeranda']);
+    });
     Route::GET('/login', [DashboardController::class, 'viewLogin'])->name('login');
     Route::POST('/login', [DashboardController::class, 'actionLogin']);
+    Route::GET('/logout', [DashboardController::class, 'actionLogout']);
 });
