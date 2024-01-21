@@ -22,7 +22,7 @@
               <div class="role">Admin</div>
           </div>
         </div>
-        <a href="" class="logout-button" title="Logout">
+        <a href="/dashboard/logout" class="logout-button" title="Logout">
           Logout
         </a>
       </div>

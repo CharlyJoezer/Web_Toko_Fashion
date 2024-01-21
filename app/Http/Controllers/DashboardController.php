@@ -29,8 +29,9 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function adminLogout(){
-
+    public function actionLogout(){
+        Auth::guard('administrator')->logout();
+        return redirect('/dashboard/login');
     }
 
     public function viewBeranda(){
