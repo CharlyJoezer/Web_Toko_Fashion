@@ -5,6 +5,10 @@
     padding: 0px;
 }
 .sidebar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
     height: 100vh;
     display: flex;
     width: 250px;
@@ -77,6 +81,7 @@
 .list_link{
     list-style-type: none;
     padding: 10px;
+    overflow-y: auto;
 }
 .list_link .link_item {
     display: flex;
