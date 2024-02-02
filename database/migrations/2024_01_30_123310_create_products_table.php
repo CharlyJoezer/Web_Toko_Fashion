@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_product');
             $table->string('name_product');
             $table->text('image_product');
-            $table->integer('price_prodct');
+            $table->integer('price_product');
             $table->smallInteger('stock_product');
             $table->smallInteger('min_order');
             $table->integer('quantity_sold');
