@@ -19,5 +19,20 @@ class DatabaseSeeder extends Seeder
             'username' => 'charly',
             'password' => Hash::make('12345'),
         ]);
+
+        \App\Models\Category_product::insert([
+            [
+                'name_category' => 'Baju',
+                'icon_category' => 'null'
+            ],
+            [
+                'name_category' => 'Celana',
+                'icon_category' => 'null'
+            ],
+            [
+                'name_category' => 'Sepatu',
+                'icon_category' => 'null'
+            ],
+        ]);
     }
 }
