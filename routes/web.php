@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 Route::prefix('dashboard')->group(function(){
     Route::middleware('auth:administrator')->group(function(){
         Route::GET('/beranda', [DashboardController::class, 'viewBeranda']);
+        Route::POST('/product/create', [ProductController::class, 'createDataProduct']);
     });
     Route::GET('/login', [DashboardController::class, 'viewLogin'])->name('login');
     Route::POST('/login', [DashboardController::class, 'actionLogin']);
