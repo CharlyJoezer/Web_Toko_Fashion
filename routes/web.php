@@ -19,6 +19,7 @@ Route::prefix('dashboard')->group(function(){
     Route::middleware('auth:administrator')->group(function(){
         Route::GET('/beranda', [DashboardController::class, 'viewBeranda']);
         Route::POST('/product/create', [ProductController::class, 'createDataProduct']);
+        Route::POST('/product/edit', [ProductController::class, 'editDataProduct']);
     });
     Route::GET('/login', [DashboardController::class, 'viewLogin'])->name('login');
     Route::POST('/login', [DashboardController::class, 'actionLogin']);

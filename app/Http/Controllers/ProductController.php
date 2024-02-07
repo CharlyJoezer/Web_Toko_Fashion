@@ -56,4 +56,45 @@ class ProductController extends Controller
         }
 
     }
+
+    public function editDataProduct(Request $request){
+        $request->validate([
+            'slug' => 'required|string',
+            'name' => 'required|min:1|max:100',
+            'image' => 'image|file:jpg,png,jpeg',
+            'price' => 'required|numeric|min:100|max:1000000000',
+            'stock' => 'required|numeric|min:0|max:9999',
+            'min_order' => 'required|numeric|min:1|max:500',
+            'category' => 'required|numeric',
+        ]);
+        $finalData = [
+            'name_product' => $request->name,
+            'price_product' => $request->price,
+            'stock_product' => $request->stock,
+            'min_order' => $request->stock,
+            'quantity_sold' => 0,
+            'category_id' => $request->category,
+        ];
+        try{
+            $getLastDataProduct = Product::where('slug', $request->slug)->first();
+            if(!isset($getLastDataProduct)){
+                return view('ErrorView.404')->with('message', 'Product tidak ditemukan');
+            }
+            $imageName = null;
+            if($request->file('image')){
+                Storage::delete('products/images/'.$getLastDataProduct['image_product']);
+                $imageName = Str::random(50).time().'.'.$request->file('image')->extension();
+                $finalData['image_product'] = $imageName;
+            }
+            $finalData['slug'] = Str::slug($request->name).'-'.Str::random(50);
+            if(Product::where('slug', $request->slug)->update($finalData)){
+                ($imageName != null) && $request->file('image')->storeAs('products/images', $imageName);
+                return back()->with('message', 'Product berhasil diedit');
+            }else{
+                return back()->with('message', 'Terjadi kesalahan di server');
+            }   
+        }catch(Exception $e){
+            return abort(500);
+        }
+    }
 }
