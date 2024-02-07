@@ -39,6 +39,7 @@ class ProductController extends Controller
                 'quantity_sold' => 0,
                 'category_id' => $request->category,
             ];
+            $finalData['slug'] = Str::slug($request->name).'-'.Str::random(50);
             $imageName = null;
             if($request->file('image')){
                 $imageName = Str::random(50).time().'.'.$request->file('image')->extension();
