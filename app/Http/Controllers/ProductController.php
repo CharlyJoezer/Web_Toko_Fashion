@@ -97,4 +97,29 @@ class ProductController extends Controller
             return abort(500);
         }
     }
+
+    public function deleteDataProduct(Request $request){
+        $request->validate([
+            'slug' => 'required|string',
+        ]);
+        try{
+            $getDataProduct = Product::where('slug', $request->slug)->first();
+            if(isset($getDataProduct)){
+                if(Product::where('slug', $request->slug)->delete() > 0){
+                    Storage::delete('products/images/'.$getDataProduct['image_product']);
+                    return back()->with('message', 'Product berhasil dihapus');
+                }else{
+                    return back()->with('message', 'Terjadi Kesalahan saat menghapus Product');
+                }
+            }else{
+                return view('ErrorView.404',[
+                    'message' => 'Product tidak ditemukan',
+                ]);
+            }
+        }catch(Exception $e){
+            return view('ErrorView.500',[
+                'message' => 'Terjadi Kesalahan Pada Server',
+            ]);
+        }
+    }
 }
