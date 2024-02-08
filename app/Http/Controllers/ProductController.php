@@ -122,4 +122,24 @@ class ProductController extends Controller
             ]);
         }
     }
+
+    public function viewCreateProduct(){
+        try{
+            $getAllCategory = Category_product::all([
+                'id_category',
+                'name_category',
+                'icon_category'
+            ]);
+            return view('dashboard.product.create',[
+                'title' => "Buat Produk | Dashboard Lofinz",
+                'css' => 'product/create_product.css',
+                'header' => 'Buat Produk',
+                'category' => $getAllCategory,
+            ]);
+        }catch(Exception $e){
+            return view('ErroView.500',[
+                'message' => 'Terjadi Kesalahan Pada Server',
+            ]);
+        }
+    }
 }

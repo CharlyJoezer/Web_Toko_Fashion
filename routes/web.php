@@ -18,6 +18,8 @@ use App\Http\Controllers\ProductController;
 Route::prefix('dashboard')->group(function(){
     Route::middleware('auth:administrator')->group(function(){
         Route::GET('/beranda', [DashboardController::class, 'viewBeranda']);
+        
+        Route::GET('/product/buat-produk', [\App\Http\Controllers\ProductController::class, 'viewCreateProduct']);
         Route::POST('/product/create', [ProductController::class, 'createDataProduct']);
         Route::POST('/product/edit', [ProductController::class, 'editDataProduct']);
         Route::DELETE('/product/delete', [ProductController::class, 'deleteDataProduct']);
