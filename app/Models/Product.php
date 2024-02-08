@@ -11,4 +11,9 @@ class Product extends Model
 
     protected $table = 'products';
     protected $guarded = ['id_product'];
+
+
+    public function category_product(){
+        return $this->hasOne(Category_product::class, 'id_category', 'category_id');
+    }
 }
