@@ -142,4 +142,31 @@ class ProductController extends Controller
             ]);
         }
     }
+
+    public function viewEditProduct($slug){
+        try{
+            $getDataProduct = Product::with('category_product')->where('slug', $slug)->first();
+            if(!isset($getDataProduct)){
+                return view('ErrorView.404',[
+                    'message' => 'Produk tidak ditemukan',
+                ]);
+            }
+            $getAllCategory = Category_product::all([
+                'id_category',
+                'name_category',
+                'icon_category'
+            ]);
+            return view('Dashboard.Product.edit',[
+                'title' => "Buat Produk | Dashboard Lofinz",
+                'css' => 'product/create_product.css',
+                'header' => 'Buat Produk',
+                'category' => $getAllCategory,
+                'product' => $getDataProduct,
+            ]);
+        }catch(Exception $e){
+            return view('ErrorView.500',[
+                'message' => 'Terjadi Kesalahan Pada Server',
+            ]);
+        }
+    }
 }
