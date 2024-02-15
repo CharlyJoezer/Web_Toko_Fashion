@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::prefix('dashboard')->group(function(){
         Route::GET('/product/buat-produk', [\App\Http\Controllers\ProductController::class, 'viewCreateProduct']);
         Route::POST('/product/create', [ProductController::class, 'createDataProduct']);
 
+        Route::GET('/product/edit', [ProductController::class, 'viewAllProduct']);
         Route::GET('/product/edit/detail/{slug}', [ProductController::class, 'viewEditProduct']);
         Route::POST('/product/edit', [ProductController::class, 'editDataProduct']);
         

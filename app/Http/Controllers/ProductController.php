@@ -169,4 +169,19 @@ class ProductController extends Controller
             ]);
         }
     }
+    public function viewAllProduct(){
+        try{
+            $getAllProduct = Product::with('category_product')->get();
+            return view('Product.index',[
+                'title' => 'Produk Toko | Dashboard Lofinz',
+                'css' => 'index.css',
+                'header' => 'Produk Toko',
+                'product' => $getAllProduct,
+            ]);
+        }catch(Exception $e){
+            return view('ErrorView.500',[
+                'message' => 'Terjadi Kesalahan Pada Server',
+            ]);
+        }
+    }
 }
