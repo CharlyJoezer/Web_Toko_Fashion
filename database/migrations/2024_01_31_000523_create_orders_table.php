@@ -19,7 +19,8 @@ return new class extends Migration
             $table->json('list_order_product');
             $table->integer('total_price');
             $table->boolean('status_payment')->default(false);
-
+            $table->enum('status_order', [false, 'created', 'process', 'sent', 'arrived'])->default(false);
+            $table->enum('user_rating', [false, 1, 2, 3, 4, 5])->default(false);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
 
